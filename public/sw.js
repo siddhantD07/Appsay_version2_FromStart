@@ -14,9 +14,6 @@ self.addEventListener('install', function(event) {
         '/',
         '/index.html',
         '/src/js/app.js',
-        'src/js/fetch.js',
-        'src/js/promise.js',
-        'socket.io/socket.io.js',
         '/src/js/feed.js',
         '/src/css/app.css',
         '/src/css/feed.css',
@@ -69,8 +66,12 @@ self.addEventListener('fetch', function(event) {
           .catch(function(err){
 
           });
-        }
+          
+      }
+  
 
-      })
-    );
-});
+    })
+
+    )
+    
+  });

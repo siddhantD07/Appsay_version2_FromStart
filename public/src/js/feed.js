@@ -7,12 +7,53 @@ const socket = io();
 
 socket.on('message', function(message){
   console.log(message);
-  // clearCards();
   outputMessage(message);
 
   sharedMomentsArea.scrollTop=sharedMomentsArea.scrollHeight;
 
+  if(document.hidden){
+      notify(message)
+  }
+
 })
+
+function notify(msg){
+
+  if (!("Notification" in window)) {
+    alert("This browser does not support desktop notification,try Chromium!");
+  }
+
+  else if(Notification.permission === "granted"){
+    var notification = new Notification('PWAGram', {
+      body: msg.username + ": " + msg.body,
+      icon: '/src/images/icons/app-icon-96x96.png' 
+    });
+
+    notification.onclick = function(event) {
+      event.preventDefault();
+      this.close();
+     
+  }
+
+}
+
+else if (Notification.permission !== 'denied') {
+  Notification.requestPermission(function(permission) {
+  
+    if (permission === "granted") {
+      var notification = new Notification('PWAGram', {
+        body: msg.username + ": " + msg.body,
+        icon: '/src/images/icons/app-icon-96x96.png'
+      });
+      notification.onclick = function(event) {
+        event.preventDefault();
+        this.close();
+        };
+    }
+  });
+}
+
+}
 
 chatForm.addEventListener('submit', function(event){
   event.preventDefault();
@@ -72,3 +113,5 @@ function clearCards() {
       sharedMomentsArea.removeChild(sharedMomentsArea.lastChild);
   }
 }
+
+
