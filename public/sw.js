@@ -75,3 +75,8 @@ self.addEventListener('fetch', function(event) {
     )
     
   });
+
+  self.addEventListener('notificationclose', function(event){
+    console.log("Notification was closed");
+  });
+  
