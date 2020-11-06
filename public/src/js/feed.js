@@ -11,9 +11,9 @@ socket.on('message', function(message){
 
   sharedMomentsArea.scrollTop=sharedMomentsArea.scrollHeight;
 
-  // if(document.hidden){
+if(!(document.visibilityState === "visible")){
       notify(message)
-  // }
+  }
 
 })
 
